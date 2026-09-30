@@ -1,0 +1,22 @@
+# Python / Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambiente Virtual
+.venv/
+
+# Variáveis de Ambiente e Segredos
+.env
+.env.local
+local_settings.py
+
+# Banco de Dados Local do Django
+db.sqlite3
+db.sqlite3-journal
+
+# Logs e Arquivos Temporários
+*.log
+
+# IDEs e Sistema Operacional
+.vscode/
