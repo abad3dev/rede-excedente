@@ -1,0 +1,73 @@
+{% extends 'principal.html' %}
+
+
+
+{% block conteudo %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      
+      <form>
+        <div class="mb-3">
+          <label for="cnpj" class="form-label">CNPJ</label>
+          <input type="text" class="form-control" id="cnpj" name="cnpj">
+        </div>
+        
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome" name="nome">
+        </div>
+        
+        <div class="mb-3">
+          <label for="cep" class="form-label">CEP</label>
+          <input type="text" class="form-control" id="cep" name="cep">
+        </div>
+        
+        <div class="mb-3">
+          <label for="logradouro" class="form-label">Logradouro</label>
+          <input type="text" class="form-control" id="logradouro" name="logradouro">
+        </div>
+        
+        <div class="mb-3">
+          <label for="numero" class="form-label">Número</label>
+          <input type="text" class="form-control" id="numero" name="numero">
+        </div>
+        
+        <div class="mb-3">
+          <label for="complemento" class="form-label">Complemento</label>
+          <input type="text" class="form-control" id="complemento" name="complemento">
+        </div>
+        
+        <div class="mb-3">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro">
+        </div>
+        
+        <div class="mb-3">
+          <label for="site" class="form-label">Site</label>
+          <input type="text" class="form-control" id="site" name="site">
+        </div>
+        
+        <div class="mb-3">
+          <label for="contato" class="form-label">Contato</label>
+          <input type="text" class="form-control" id="contato" name="contato">
+        </div>
+        
+        <div class="mb-3">
+          <label for="telefone" class="form-label">Telefone</label>
+          <input type="text" class="form-control" id="telefone" name="telefone">
+        </div>
+        
+        
+        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock conteudo %}
+
+
+
