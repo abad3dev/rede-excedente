@@ -20,3 +20,6 @@ db.sqlite3-journal
 
 # IDEs e Sistema Operacional
 .vscode/
+
+# Credenciais e Configurações Locais
+.env
