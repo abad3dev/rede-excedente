@@ -1,12 +1,47 @@
-{% extends 'principal.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        
+    <title>Rede Excedente</title>
 
 
+<body>
 
-{% block conteudo %}
 
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-12 col-md-8 col-lg-6">
+
+
+      {% if messages %}
+    <div class="container mt-3 mb-3">
+        {% for message in messages %}
+            <!-- A classe alert-danger é aplicada se for erro, senão usa a tag original (success, info, warning) -->
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow-sm" role="alert">
+                
+                <!-- Ícones (FontAwesome) -->
+                {% if message.tags == 'success' %}
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fa-solid fa-circle-exclamation me-2"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                {% elif message.tags == 'info' %}
+                    <i class="fa-solid fa-circle-info me-2"></i>
+                {% endif %}
+                
+                {{ message }}
+                
+                <!-- Botão X -->
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
       
 <form method="post">
     {% csrf_token %}
@@ -34,7 +69,7 @@
           <label for="numero" class="form-label">Número</label>
           <input type="text" class="form-control" id="numero" name="numero">
         </div>
-        
+
         <div class="mb-3">
           <label for="complemento" class="form-label">Complemento</label>
           <input type="text" class="form-control" id="complemento" name="complemento">
@@ -43,6 +78,20 @@
         <div class="mb-3">
           <label for="bairro" class="form-label">Bairro</label>
           <input type="text" class="form-control" id="bairro" name="bairro">
+        </div>
+
+
+
+        <div class="mb-3">
+          <label for="cidade" class="form-label">Cidade</label><br>
+
+          <select id="id_cidade" name="id_cidade">
+            <option value="">Selecione a cidade...</option>
+            {% for cidade in cidades %}
+              <option value="{{ cidade.id_cidade }}">{{ cidade.nome }}</option>
+            {% endfor %}
+          </select>
+
         </div>
         
         <div class="mb-3">
@@ -68,7 +117,10 @@
   </div>
 </div>
 
-{% endblock conteudo %}
 
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
 
+{% include 'rodape.html' %}
+</body>
 
+</html>

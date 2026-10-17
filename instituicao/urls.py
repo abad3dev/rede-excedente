@@ -1,10 +1,8 @@
-
-from os import path
 from django.urls import path
-from django.views.generic import TemplateView
 from instituicao import views
 
 urlpatterns = [
-    path('cadastrar/', TemplateView.as_view(template_name='cadastrar_instituicao.html'), name='cadastrar_instituicao'),
-
+    # Aqui nós chamamos a sua função "cadastrar_instituicao" que está no views.py
+    path('cadastrar/', views.cadastrar_instituicao, name='cadastrar_instituicao'),
+    path('', views.iniciar, name='iniciar'),
 ]
