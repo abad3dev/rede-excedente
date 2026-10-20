@@ -5,6 +5,38 @@
 
 {% block conteudo %}
 
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0">Materiais Disponíveis</h5>
+  <a href="/material/cadastrar/" class="btn btn-primary">
+    + Cadastrar material
+  </a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover border">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">Material</th>
+        <th scope="col">Tipo de Material</th>
+        <th scope="col">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        {% for material in materiais %}
+      <tr>
+        <td>{{ material.descricao }}</td>
+        <td>{{ material.id_tipo_material.tipo }}</td>
+        <td>  <a href="#" class="btn btn-primary">
+    + Informar disponibilidade
+  </a></td>
+      </tr>
+
+        {% endfor %}
+
+    </tbody>
+  </table>
+</div>
 
 {% endblock conteudo %}
 

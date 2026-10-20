@@ -8,10 +8,13 @@ from instituicao.forms import InstituicaoForm
 from django.contrib.auth.decorators import login_required
 
 from instituicao.models import Cidade
+from material.models import Material, TipoMaterial
 
 @login_required
 def iniciar(request):
-    return render(request, 'iniciar.html')
+    materiais = Material.objects.all()
+    tipomateriais = TipoMaterial.objects.all()
+    return render(request, 'iniciar.html', {'materiais': materiais})
 
 @login_required
 def cadastrar_instituicao(request):

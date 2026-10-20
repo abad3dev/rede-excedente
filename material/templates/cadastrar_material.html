@@ -1,50 +1,68 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Cadastro de material</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="w3.css">
-    <link rel="stylesheet" href="all.min.css">
-</head>
-
-<body>
+{% extends 'principal.html' %}
+{% load static %}
 
 
 
+{% block conteudo %}
 
-    <div class="w3-card-4">
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
 
-  <header class="w3-container w3-green">
-    <h2>Rede Excedente -Cadastro de material</h2>
-  </header>
 
-<div class="w3-content" style="width: 50%; margin-top: 50px;">
-  <form class="w3-container">
-    <p>
-      <input class="w3-input" type="text" name="descricao">
-      <label>Descrição</label>
-    </p>
-   
- <p>
-    <select class="w3-select" name="tipo_material">
-  <option value="" disabled selected>Escolha o tipo de material</option>
-  <option value="1">Móvel</option>
-  <option value="2">Eletrônico</option>
-  <option value="3">Outro</option>
-</select>
-</p>
+      {% if messages %}
+    <div class="container mt-3 mb-3">
+        {% for message in messages %}
+            <!-- A classe alert-danger é aplicada se for erro, senão usa a tag original (success, info, warning) -->
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow-sm" role="alert">
+                
+                <!-- Ícones (FontAwesome) -->
+                {% if message.tags == 'success' %}
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fa-solid fa-circle-exclamation me-2"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                {% elif message.tags == 'info' %}
+                    <i class="fa-solid fa-circle-info me-2"></i>
+                {% endif %}
+                
+                {{ message }}
+                
+                <!-- Botão X -->
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+      
+<form method="post">
+    {% csrf_token %}
+        <div class="mb-3">
+          <label for="cnpj" class="form-label">Descrição</label>
+          <input type="text" class="form-control" id="descricao" name="descricao">
+        </div>
+        
+        <div class="mb-3">
+          <label for="material" class="form-label">Tipo de material</label><br>
 
-  </form>
+          <select id="id_material" name="id_material">
+            <option value="">Selecione o tipo de material...</option>
+            {% for tipomaterial in tipomateriais %}
+              <option value="{{ tipomaterial.id_tipo_material }}">{{ tipomaterial.tipo }}</option>
+            {% endfor %}
+          </select>
+
+        </div>
+                
+        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+      </form>
+
+    </div>
+  </div>
 </div>
 
-  <footer class="w3-container w3-light-grey">
-    <p>PI-2 - Univesp</p>
-  </footer>
 
-</div>
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
 
-</body>
-
-
-</html>
+{% endblock conteudo %}
