@@ -1,0 +1,77 @@
+{% extends 'principal.html' %}
+{% load static %}
+
+
+
+{% block conteudo %}
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+
+
+      {% if messages %}
+    <div class="container mt-3 mb-3">
+        {% for message in messages %}
+            <!-- A classe alert-danger é aplicada se for erro, senão usa a tag original (success, info, warning) -->
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show shadow-sm" role="alert">
+                
+                <!-- Ícones (FontAwesome) -->
+                {% if message.tags == 'success' %}
+                    <i class="fa-solid fa-circle-check me-2"></i>
+                {% elif message.tags == 'error' %}
+                    <i class="fa-solid fa-circle-exclamation me-2"></i>
+                {% elif message.tags == 'warning' %}
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i>
+                {% elif message.tags == 'info' %}
+                    <i class="fa-solid fa-circle-info me-2"></i>
+                {% endif %}
+                
+                {{ message }}
+                
+                <!-- Botão X -->
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+      
+<form method="post">
+    {% csrf_token %}
+        <div class="mb-3">
+          <label for="cnpj" class="form-label">Material</label>
+          {% for material in materiais %}
+            {% if material.id_material == id_material %}
+              {{ material.descricao }}
+            {% endif %}
+          {% endfor %}
+        </div>
+        
+        <div class="mb-3">
+          <label for="material" class="form-label">Quantidade</label><br>
+
+        <select name="quantidade" id="quantidade">
+        {% for i in quantidades %}
+        <option value="{{ i }}">{{ i }}</option>
+        {% endfor %}
+        </select>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="valor_estimado" class="form-label">Valor unitário estimado</label>
+          <input type="number" class="form-control" id="valor_estimado" name="valor_estimado" step="0.01">
+        </div>
+        <input type="hidden" name="id_material" value="{{ id_material }}">
+        <input type="hidden" name="id_instituicao" value="{{ id_instituicao }}">
+        <button type="submit" class="btn btn-primary w-100">Cadastrar</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+
+<script src="{% static '/js/bootstrap.bundle.min.js' %}"></script>
+
+{% endblock conteudo %}

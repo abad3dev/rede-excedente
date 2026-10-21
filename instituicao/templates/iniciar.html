@@ -27,7 +27,7 @@
       <tr>
         <td>{{ material.descricao }}</td>
         <td>{{ material.id_tipo_material.tipo }}</td>
-        <td>  <a href="#" class="btn btn-primary">
+        <td>  <a href="{% url 'disponibilizar' id_material=material.id_material %}" class="btn btn-primary">
     + Informar disponibilidade
   </a></td>
       </tr>
