@@ -46,7 +46,7 @@
         <div class="mb-3">
           <label for="material" class="form-label">Tipo de material</label><br>
 
-          <select id="id_material" name="id_material">
+          <select id="id_tipo_material" name="id_tipo_material">
             <option value="">Selecione o tipo de material...</option>
             {% for tipomaterial in tipomateriais %}
               <option value="{{ tipomaterial.id_tipo_material }}">{{ tipomaterial.tipo }}</option>

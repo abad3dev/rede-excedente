@@ -1,4 +1,4 @@
-from django.core.checks import messages
+from django.contrib import messages
 from django.shortcuts import redirect, render
 from material.forms import MaterialForm
 from material.models import TipoMaterial
