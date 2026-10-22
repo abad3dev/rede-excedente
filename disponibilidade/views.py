@@ -3,8 +3,10 @@ from django.shortcuts import get_object_or_404, redirect, render
 from disponibilidade.forms import DisponibilidadeForm
 from disponibilidade.models import Disponibilidade
 from material.models import Material
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def disponibilizar(request, id_material):
 
     if request.method == 'POST':
@@ -28,3 +30,16 @@ def disponibilizar(request, id_material):
         material_selecionado = get_object_or_404(Material, id_material=id_material)
         materiais = Material.objects.all()
         return render(request, 'disponibilizar_material.html', {'id_material': id_material, 'quantidades': quantidades, 'materiais': materiais, 'id_instituicao': id_instituicao})
+
+
+@login_required
+def consultar_minhasdoacoes(request):
+
+    id_instituicao = request.session.get('id_inst')
+
+    disponibilidades = Disponibilidade.objects.filter(id_instituicao=id_instituicao).select_related('id_material')
+
+    for disponibilidade in disponibilidades:
+        disponibilidade.valor_total = disponibilidade.quantidade * disponibilidade.valor_estimado
+
+    return render(request, 'consultar_minhasdoacoes.html', {'disponibilidades': disponibilidades})

@@ -6,5 +6,6 @@ from disponibilidade import views
 
 urlpatterns = [
    path('disponibilizar/<int:id_material>/', views.disponibilizar, name='disponibilizar'),
+   path('consultar_minhasdoacoes/', views.consultar_minhasdoacoes, name='consultar_minhasdoacoes'),
 
 ]
