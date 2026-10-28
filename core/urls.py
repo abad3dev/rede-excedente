@@ -21,7 +21,7 @@ from core.views import index_view
 urlpatterns = [
     path('', index_view, name='index'),
     path('admin/', admin.site.urls),
-    path('instituicao/', include('instituicao.urls')),
+    path('usuario/', include('usuario.urls')),
     path('material/', include('material.urls')),
     path('disponibilidade/', include('disponibilidade.urls')),
     path('accounts/', include('allauth.urls')),  # URLs do django-allauth

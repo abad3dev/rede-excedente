@@ -1,6 +1,7 @@
 from django.db import models
 
-from instituicao.models import Instituicao
+
+from usuario.models import Usuario
 
 class TipoMaterial(models.Model):
     id_tipo_material = models.AutoField(primary_key=True)
@@ -17,13 +18,13 @@ class Material(models.Model):
     def __str__(self):
         return self.descricao
 
-class InstituicaoTipoMaterial(models.Model):
-    id_instituicao = models.ForeignKey(Instituicao, on_delete=models.CASCADE)
+class UsuarioTipoMaterial(models.Model):
+    id_usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
     
     id_tipo_material = models.ForeignKey(TipoMaterial, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"{self.id_instituicao.nome} - {self.id_tipo_material.tipo}"
+        return f"{self.id_usuario.nome} - {self.id_tipo_material.tipo}"
 
 
 

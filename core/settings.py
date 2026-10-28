@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'instituicao',
+    'usuario',
     'material',
     'disponibilidade',
     # allauth
@@ -103,7 +103,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # Redirecionamento após login e logout
-LOGIN_REDIRECT_URL = '/instituicao/cadastrar/'
+LOGIN_REDIRECT_URL = '/usuario/cadastrar/'
 LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_EMAIL_AUTHENTICATION = True

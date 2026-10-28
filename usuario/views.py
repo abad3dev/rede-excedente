@@ -4,10 +4,10 @@ from django.contrib import messages
 
 from django.shortcuts import redirect, render
 
-from instituicao.forms import InstituicaoForm
+from usuario.forms import UsuarioForm
 from django.contrib.auth.decorators import login_required
 
-from instituicao.models import Cidade
+from usuario.models import Cidade
 from material.models import Material, TipoMaterial
 
 @login_required
@@ -17,30 +17,30 @@ def iniciar(request):
     return render(request, 'iniciar.html', {'materiais': materiais})
 
 @login_required
-def cadastrar_instituicao(request):
-    # 1. Proteção: Se o usuário já tem instituição, manda pro sistema e barra a tela de cadastro
-    if hasattr(request.user, 'instituicao'):
+def cadastrar_usuario(request):
+    # 1. Proteção: Se o usuário já tem usuário, manda pro sistema e barra a tela de cadastro
+    if hasattr(request.user, 'usuario'):
         return redirect('iniciar') 
     
     if request.method == 'POST':
-        form = InstituicaoForm(request.POST)
+        form = UsuarioForm(request.POST)
         if form.is_valid():
     
-            nova_instituicao = form.save(commit=False)
+            novo_usuario = form.save(commit=False)
     
-            nova_instituicao.usuario = request.user 
+            novo_usuario.usuario = request.user 
     
-            nova_instituicao.save()
+            novo_usuario.save()
             
-            messages.success(request, 'Instituição cadastrada com sucesso!')
+            messages.success(request, 'Usuário cadastrado com sucesso!')
     
             return redirect('iniciar') 
         else:
             print("Erros do formulário:", form.errors)
             messages.error(request, 'Erro ao cadastrar. Verifique os dados e tente novamente.')
     else:
-        form = InstituicaoForm()
+        form = UsuarioForm()
 
     cidades = Cidade.objects.all().order_by('nome')
        
-    return render(request, 'cadastrar_instituicao.html', {'form': form, 'cidades': cidades})
+    return render(request, 'cadastrar_usuario.html', {'form': form, 'cidades': cidades})

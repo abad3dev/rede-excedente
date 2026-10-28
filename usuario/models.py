@@ -2,9 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Instituicao(models.Model):
-    id_inst = models.AutoField(primary_key=True)
-    cnpj = models.CharField(max_length=18, unique=True)
+class Usuario(models.Model):
+    id_usuario = models.AutoField(primary_key=True)
     nome = models.CharField(max_length=100)
     cep = models.CharField(max_length=9)
     logradouro = models.CharField(max_length=100)
@@ -15,7 +14,7 @@ class Instituicao(models.Model):
     contato = models.CharField(max_length=100, blank=True, null=True)
     telefone = models.CharField(max_length=15, blank=True, null=True)
     id_cidade = models.ForeignKey('Cidade', on_delete=models.CASCADE)
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='instituicao')
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, related_name='usuario')
     
     def __str__(self):
         return self.nome

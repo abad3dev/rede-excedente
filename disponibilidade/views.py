@@ -25,19 +25,19 @@ def disponibilizar(request, id_material):
             messages.error(request, 'Erro ao cadastrar. Verifique os dados e tente novamente.')
     else:   
 
-        id_instituicao = request.session.get('id_inst')
+        id_usuario = request.session.get('id_usuario')
         quantidades = range(1, 1001)
         material_selecionado = get_object_or_404(Material, id_material=id_material)
         materiais = Material.objects.all()
-        return render(request, 'disponibilizar_material.html', {'id_material': id_material, 'quantidades': quantidades, 'materiais': materiais, 'id_instituicao': id_instituicao})
+        return render(request, 'disponibilizar_material.html', {'id_material': id_material, 'quantidades': quantidades, 'materiais': materiais, 'id_usuario': id_usuario})
 
 
 @login_required
 def consultar_minhasdoacoes(request):
 
-    id_instituicao = request.session.get('id_inst')
+    id_usuario = request.session.get('id_usuario')
 
-    disponibilidades = Disponibilidade.objects.filter(id_instituicao=id_instituicao).select_related('id_material')
+    disponibilidades = Disponibilidade.objects.filter(id_usuario=id_usuario).select_related('id_material')
 
     for disponibilidade in disponibilidades:
         disponibilidade.valor_total = disponibilidade.quantidade * disponibilidade.valor_estimado
